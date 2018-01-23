@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="celdaDisponible">#3e8418</color>
+    <color name="celdaOcupada">#b60d1e</color>
+    <color name="blanco">#fdfdfd</color>
+    <color name="gris">#8c8a8a</color>
+    <color name="negro">#000000</color>
+    <color name="azul">#3294c1</color>
+</resources>

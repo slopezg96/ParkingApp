@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ParkingApp</string>
+    <string name="actionBar_title">PARKING</string>
+    <string name="texto_nuevo_vehiculo">Nuevo vehículo</string>
+    <string name="text_hint_placa">Placa</string>
+    <string name="texto_siglas_centimetros_cubicos">C.C</string>
+    <string name="texto_hint_cilindraje">Cilindraje</string>
+    <string name="texto_guardar_boton">GUARDAR</string>
+    <string name="texto_salida_vehiculo">Sálida vehículo</string>
+    <string name="texto_fecha_ingreso">Fecha ingreso</string>
+    <string name="texto_button_cobrar">COBRAR</string>
+</resources>
