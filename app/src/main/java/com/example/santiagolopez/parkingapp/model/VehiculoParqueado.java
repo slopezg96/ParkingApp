@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class VehiculoParqueado {
 
+
     private Vehiculo vehiculo;
     private Date fechaIngreso;
     private Date fechaSalida;

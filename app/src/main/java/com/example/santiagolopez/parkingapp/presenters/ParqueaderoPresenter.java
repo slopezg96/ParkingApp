@@ -4,21 +4,24 @@ import com.example.santiagolopez.parkingapp.businesslogic.IParqueaderoBusinessLo
 import com.example.santiagolopez.parkingapp.businesslogic.ParqueaderoBusinessLogic;
 import com.example.santiagolopez.parkingapp.view.interfaces.IHomeView;
 
+import javax.inject.Inject;
+
 /**
  * Created by santiago.lopez on 1/22/18.
  */
 
 public class ParqueaderoPresenter extends BasePresenter<IHomeView>{
 
-    private IParqueaderoBusinessLogic iParqueaderoBusinessLogic;
+    private ParqueaderoBusinessLogic parqueaderoBusinessLogic;
 
-    public ParqueaderoPresenter() {
-        iParqueaderoBusinessLogic = new ParqueaderoBusinessLogic();
+    @Inject
+    public ParqueaderoPresenter(ParqueaderoBusinessLogic parqueaderoBusinessLogic) {
+        this.parqueaderoBusinessLogic = parqueaderoBusinessLogic;
     }
 
     @Override
     public void iniciar() {
-        vista.mostrarVehiculosParqueados(iParqueaderoBusinessLogic.traerVehiculosParqueados());
+        parqueaderoBusinessLogic.traerVehiculosParqueados();
     }
 
     @Override

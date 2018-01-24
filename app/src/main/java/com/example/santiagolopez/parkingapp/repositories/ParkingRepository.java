@@ -1,5 +1,6 @@
 package com.example.santiagolopez.parkingapp.repositories;
 
+import com.example.santiagolopez.parkingapp.VehiculoParqueadoDTO;
 import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
 import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
 import com.example.santiagolopez.parkingapp.services.IServices;
@@ -46,6 +47,20 @@ public class ParkingRepository implements IParkingRepository{
 
     @Override
     public List<VehiculoParqueado> getVehiculosParqueados() {
-        return null;
+        final List<VehiculoParqueado> vehiculosParqueados = new ArrayList<>();
+        iServices.getVehiculosParqueados().enqueue(new Callback<List<VehiculoParqueadoDTO>>() {
+            @Override
+            public void onResponse(Call<List<VehiculoParqueadoDTO>> call, Response<List<VehiculoParqueadoDTO>> response) {
+                if(response.isSuccessful()) {
+                    response.body();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<VehiculoParqueadoDTO>> call, Throwable t) {
+                t.getMessage();
+            }
+        });
+        return vehiculosParqueados;
     }
 }

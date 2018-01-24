@@ -11,17 +11,16 @@ import com.example.santiagolopez.parkingapp.R;
 import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
 import com.example.santiagolopez.parkingapp.view.adapters.ParqueaderoPagerAdapter;
 import com.example.santiagolopez.parkingapp.view.interfaces.IHomeView;
-import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
 import com.example.santiagolopez.parkingapp.presenters.BasePresenter;
 import com.example.santiagolopez.parkingapp.presenters.ParqueaderoPresenter;
-import com.example.santiagolopez.parkingapp.view.poopup.NuevoVehiculoPopUp;
-import com.example.santiagolopez.parkingapp.view.poopup.SalidaVehiculoPopup;
+import com.example.santiagolopez.parkingapp.view.popup.NuevoVehiculoPopUp;
+import com.example.santiagolopez.parkingapp.view.popup.SalidaVehiculoPopup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeActivity extends BaseActivity<BasePresenter> implements IHomeView{
+public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements IHomeView{
 
     private ViewPager viewPagerTabsParqueadero;
     private TabLayout tabLayout;
@@ -31,7 +30,7 @@ public class HomeActivity extends BaseActivity<BasePresenter> implements IHomeVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        presentador = new ParqueaderoPresenter();
+        dependencia.getContenedor().build().inject(this);
         presentador.adicionarVista(this);
         configurarActionBar();
         obtenerControles();
@@ -50,21 +49,6 @@ public class HomeActivity extends BaseActivity<BasePresenter> implements IHomeVi
     }
 
     private void crearTabs(List<VehiculoParqueado> vehiculosParqueados) {
-        vehiculosParqueados = new ArrayList<>();
-        VehiculoParqueado vehiculoParqueado = new VehiculoParqueado();
-        vehiculoParqueado.getVehiculo().getTipo().setNombre("Moto");
-        vehiculoParqueado.getVehiculo().setPlaca("STF94D");
-        vehiculosParqueados.add(vehiculoParqueado);
-
-        VehiculoParqueado vehiculoParqueado1 = new VehiculoParqueado();
-        vehiculoParqueado1.getVehiculo().getTipo().setNombre("Carro");
-        vehiculoParqueado1.getVehiculo().setPlaca("KMG213");
-        vehiculosParqueados.add(vehiculoParqueado1);
-
-        VehiculoParqueado vehiculoParqueado2 = new VehiculoParqueado();
-        vehiculoParqueado2.getVehiculo().getTipo().setNombre("Carro");
-        vehiculoParqueado2.getVehiculo().setPlaca("ASW953");
-        vehiculosParqueados.add(vehiculoParqueado2);
         viewPagerTabsParqueadero.setAdapter(new ParqueaderoPagerAdapter(
                 getSupportFragmentManager(), vehiculosParqueados));
         tabLayout.setupWithViewPager(viewPagerTabsParqueadero);

@@ -22,8 +22,8 @@ public class ParqueaderoBusinessLogic implements IParqueaderoBusinessLogic{
     public static final String MOTO = "Moto";
     public static final String CARRO = "Carro";
 
-    public ParqueaderoBusinessLogic() {
-        this.iParkingRepository = new ParkingRepository();
+    public ParqueaderoBusinessLogic(IParkingRepository iParkingRepository) {
+        this.iParkingRepository = iParkingRepository;
     }
 
     public void ingresoVehiculo(Vehiculo vehiculo) {
