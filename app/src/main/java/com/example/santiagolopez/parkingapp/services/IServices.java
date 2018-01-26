@@ -1,8 +1,8 @@
 package com.example.santiagolopez.parkingapp.services;
 
-import com.example.santiagolopez.parkingapp.VehiculoParqueadoDTO;
+import com.example.santiagolopez.parkingapp.services.dto.TipoVehiculoDTO;
+import com.example.santiagolopez.parkingapp.services.dto.VehiculoParqueadoDTO;
 import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
-import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
 
 import java.util.List;
 
@@ -18,9 +18,12 @@ import retrofit2.http.POST;
 public interface IServices {
 
     @GET("tiposVehiculo/")
-    Call<List<TipoVehiculo>> getTodosTiposVehiculo();
+    Call<List<TipoVehiculoDTO>> getTodosTiposVehiculo();
 
 
     @GET("vehiculosParqueados/")
     Call<List<VehiculoParqueadoDTO>> getVehiculosParqueados();
+
+    @POST("vehiculosParqueados/")
+    Call<VehiculoParqueadoDTO> ingresarVehiculoParqueado(@Body VehiculoParqueadoDTO vehiculoParqueadoDTO);
 }

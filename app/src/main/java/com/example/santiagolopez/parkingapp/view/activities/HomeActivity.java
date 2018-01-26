@@ -9,22 +9,22 @@ import android.view.MenuItem;
 
 import com.example.santiagolopez.parkingapp.R;
 import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
+import com.example.santiagolopez.parkingapp.presenters.ParqueaderoPresenter;
 import com.example.santiagolopez.parkingapp.view.adapters.ParqueaderoPagerAdapter;
 import com.example.santiagolopez.parkingapp.view.interfaces.IHomeView;
-import com.example.santiagolopez.parkingapp.presenters.BasePresenter;
-import com.example.santiagolopez.parkingapp.presenters.ParqueaderoPresenter;
 import com.example.santiagolopez.parkingapp.view.popup.NuevoVehiculoPopUp;
 import com.example.santiagolopez.parkingapp.view.popup.SalidaVehiculoPopup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements IHomeView{
+public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements IHomeView {
 
     private ViewPager viewPagerTabsParqueadero;
     private TabLayout tabLayout;
     private FragmentManager fragmentManager;
+    private ParqueaderoPagerAdapter parqueaderoPagerAdapter;
+    private List<VehiculoParqueado> vehiculoParqueados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +48,26 @@ public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements 
         viewPagerTabsParqueadero = findViewById(R.id.viewPagerTabs_Parqueadero);
     }
 
-    private void crearTabs(List<VehiculoParqueado> vehiculosParqueados) {
-        viewPagerTabsParqueadero.setAdapter(new ParqueaderoPagerAdapter(
-                getSupportFragmentManager(), vehiculosParqueados));
+    private void crearTabs() {
+        parqueaderoPagerAdapter = new ParqueaderoPagerAdapter(
+                getSupportFragmentManager(), vehiculoParqueados);
+        viewPagerTabsParqueadero.setAdapter(parqueaderoPagerAdapter);
         tabLayout.setupWithViewPager(viewPagerTabsParqueadero);
     }
 
     @Override
     public void mostrarVehiculosParqueados(List<VehiculoParqueado> vehiculosParqueados) {
-        crearTabs(vehiculosParqueados);
+        this.vehiculoParqueados = vehiculosParqueados;
+        crearTabs();
+    }
+
+    @Override
+    public void refrescarDisponibilidadParqueadero(VehiculoParqueado vehiculoParqueado) {
+        vehiculoParqueados.add(vehiculoParqueado);
+        crearTabs();
+        if (vehiculoParqueado.getVehiculo().getTipo().getNombre().equals("Carro")) {
+            viewPagerTabsParqueadero.setCurrentItem(1);
+        }
     }
 
     @Override
@@ -67,9 +78,10 @@ public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_entrada_vehiculo:
                 NuevoVehiculoPopUp nuevoVehiculoPopUp = new NuevoVehiculoPopUp();
+                nuevoVehiculoPopUp.setiHomeView(this);
                 nuevoVehiculoPopUp.show(fragmentManager, "");
                 break;
             case R.id.action_salida_vehiculo:

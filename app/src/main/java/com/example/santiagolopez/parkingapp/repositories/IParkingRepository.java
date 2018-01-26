@@ -1,9 +1,11 @@
 package com.example.santiagolopez.parkingapp.repositories;
 
-import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
-import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
+
+import com.example.santiagolopez.parkingapp.services.dto.VehiculoParqueadoDTO;
 
 import java.util.List;
+
+import retrofit2.Callback;
 
 /**
  * Created by santiago.lopez on 1/22/18.
@@ -11,7 +13,8 @@ import java.util.List;
 
 public interface IParkingRepository {
 
-    List<TipoVehiculo> getTodosTiposVehiculo();
+     void getVehiculosParqueados(Callback<List<VehiculoParqueadoDTO>> callback);
 
-    List<VehiculoParqueado> getVehiculosParqueados();
+    void ingresarVehiculoParqueado(Callback<VehiculoParqueadoDTO> callback,
+                                   VehiculoParqueadoDTO vehiculoParqueadoDTO);
 }

@@ -2,7 +2,9 @@ package com.example.santiagolopez.parkingapp.dependencyinjection.modulos;
 
 import com.example.santiagolopez.parkingapp.ParqueaderoApp;
 import com.example.santiagolopez.parkingapp.repositories.IParkingRepository;
+import com.example.santiagolopez.parkingapp.repositories.ITipoVehiculoRepository;
 import com.example.santiagolopez.parkingapp.repositories.ParkingRepository;
+import com.example.santiagolopez.parkingapp.repositories.TipoVehiculoRepository;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,5 +25,10 @@ public class ModuloDominio {
     @Provides
     IParkingRepository provideIParkingRepository() {
         return new ParkingRepository();
+    }
+
+    @Provides
+    ITipoVehiculoRepository provideITipoVehiculoRepository() {
+        return new TipoVehiculoRepository();
     }
 }

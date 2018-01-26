@@ -13,6 +13,10 @@ public class TipoVehiculo implements Serializable {
     private double valorDia;
     private double valorHora;
 
+    public TipoVehiculo() {
+        nombre = "";
+    }
+
     public String getId() {
         return id;
     }

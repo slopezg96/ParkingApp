@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -57,7 +56,7 @@ public class ExampleUnitTest {
         Vehiculo vehiculo = new Vehiculo();
         vehiculo.setTipo(getTipoMoto());
         when(parqueaderoBusinessLogic.hayCeldasDisponibles(vehiculo)).thenReturn(false);
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         verify(parqueaderoBusinessLogic, never()).addVehiculo(vehiculo);
     }
 
@@ -68,7 +67,7 @@ public class ExampleUnitTest {
         vehiculo.setTipo(getTipoMoto());
         vehiculo.setPlaca("STF94D");
         when(parqueaderoBusinessLogic.hayCeldasDisponibles(vehiculo)).thenReturn(true);
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         verify(parqueaderoBusinessLogic).addVehiculo(vehiculo);
     }
 
@@ -77,7 +76,7 @@ public class ExampleUnitTest {
         Vehiculo vehiculo = new Vehiculo();
         vehiculo.setTipo(getTipoCarro());
         when(parqueaderoBusinessLogic.hayCeldasDisponibles(vehiculo)).thenReturn(false);
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         verify(parqueaderoBusinessLogic, never()).addVehiculo(vehiculo);
     }
 
@@ -89,7 +88,7 @@ public class ExampleUnitTest {
         vehiculo.setTipo(getTipoCarro());
         vehiculo.setPlaca("STF94D");
         when(parqueaderoBusinessLogic.hayCeldasDisponibles(vehiculo)).thenReturn(true);
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         verify(parqueaderoBusinessLogic).addVehiculo(vehiculo);
     }
 
@@ -101,7 +100,7 @@ public class ExampleUnitTest {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         verify(parqueaderoBusinessLogic, never()).addVehiculo(vehiculo);
     }
 
@@ -235,7 +234,7 @@ public class ExampleUnitTest {
         vehiculo.setFechaIngreso(calendarIngreso.getTime());
         vehiculo.setFechaSalida(calendarSalida.getTime());
 
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         parqueaderoBusinessLogic.salidaVehiculo(vehiculo);
         verify(parqueaderoBusinessLogic).liberarPuestoParqueadero(vehiculo);
     }
@@ -253,7 +252,7 @@ public class ExampleUnitTest {
         vehiculo.setFechaIngreso(calendarIngreso.getTime());
         vehiculo.setFechaSalida(calendarSalida.getTime());
 
-        parqueaderoBusinessLogic.ingresoVehiculo(vehiculo);
+        parqueaderoBusinessLogic.validarDisponibilidadParqueadero(vehiculo);
         parqueaderoBusinessLogic.salidaVehiculo(vehiculo);
         verify(parqueaderoBusinessLogic).liberarPuestoParqueadero(vehiculo);
     }

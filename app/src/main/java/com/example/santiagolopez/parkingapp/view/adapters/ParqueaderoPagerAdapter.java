@@ -47,6 +47,11 @@ public class ParqueaderoPagerAdapter extends FragmentStatePagerAdapter{
         return listaTitulos.get(position);
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
+    }
+
     private void crearListaDeTitulo() {
         listaTitulos.add(TITULO_MOTOS);
         listaTitulos.add(TITULO_CARROS);

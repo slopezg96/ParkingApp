@@ -1,8 +1,6 @@
 package com.example.santiagolopez.parkingapp.model;
 
 
-import java.util.Date;
-
 /**
  * Created by santiago.lopez on 1/17/18.
  */
@@ -12,15 +10,11 @@ public class Vehiculo {
     private TipoVehiculo tipo;
     private String placa;
     private int cilindraje;
-    private Date fechaIngreso;
-    private Date fechaSalida;
-    private double totalPagar;
 
     public Vehiculo() {
         placa = "";
         tipo = new TipoVehiculo();
         cilindraje = 0;
-        totalPagar = 0;
     }
 
     public TipoVehiculo getTipo() {
@@ -39,14 +33,6 @@ public class Vehiculo {
         return placa;
     }
 
-    public Date getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    public Date getFechaSalida() {
-        return fechaSalida;
-    }
-
     public int getCilindraje() {
         return cilindraje;
     }
@@ -55,19 +41,4 @@ public class Vehiculo {
         this.cilindraje = cilindraje;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
-    }
-
-    public void setFechaSalida(Date fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-
-    public double getTotalPagar() {
-        return totalPagar;
-    }
-
-    public void setTotalPagar(double totalPagar) {
-        this.totalPagar = totalPagar;
-    }
 }

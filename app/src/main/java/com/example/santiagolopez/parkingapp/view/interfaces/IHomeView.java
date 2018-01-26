@@ -11,4 +11,6 @@ import java.util.List;
 public interface IHomeView extends BaseView {
 
     void mostrarVehiculosParqueados(List<VehiculoParqueado> vehiculosParqueados);
+
+    void refrescarDisponibilidadParqueadero(VehiculoParqueado vehiculoParqueado);
 }

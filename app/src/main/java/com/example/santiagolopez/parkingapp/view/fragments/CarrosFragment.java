@@ -41,6 +41,7 @@ public class CarrosFragment extends Fragment {
         return rootView;
     }
 
+
     private void llenarAdapterCarros() {
         recyclerViewCarros.setLayoutManager(new GridLayoutManager(getContext(), 4));
         recyclerViewCarros.setHasFixedSize(true);
