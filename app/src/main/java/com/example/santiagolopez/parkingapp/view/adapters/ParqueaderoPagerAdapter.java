@@ -22,12 +22,14 @@ public class ParqueaderoPagerAdapter extends FragmentStatePagerAdapter{
     private static final String TITULO_CARROS = "CARROS";
     private List<Fragment> listaFragmentos = new ArrayList<>();
     private List<String> listaTitulos = new ArrayList<>();
-    private List<VehiculoParqueado> vehiculosParqueados;
+    private List<VehiculoParqueado> motosParqueadas;
+    private List<VehiculoParqueado> carrosParqueados;
 
     public ParqueaderoPagerAdapter(FragmentManager fragmentManager,
-                                   List<VehiculoParqueado> vehiculosParqueados) {
+                                   List<VehiculoParqueado> motosParqueadas, List<VehiculoParqueado> carrosParqueados) {
         super(fragmentManager);
-        this.vehiculosParqueados = vehiculosParqueados;
+        this.motosParqueadas = motosParqueadas;
+        this.carrosParqueados = carrosParqueados;
         crearListaDeFragmentos();
         crearListaDeTitulo();
     }
@@ -64,35 +66,17 @@ public class ParqueaderoPagerAdapter extends FragmentStatePagerAdapter{
     }
 
     private Fragment crearFragmentoCarros() {
-        List<VehiculoParqueado> carrosParqueados = new ArrayList<>();
-        carrosParqueados.addAll(vehiculosParqueados);
-        filtrarSoloCarros(carrosParqueados);
         CarrosFragment carrosFragment = new CarrosFragment();
         carrosFragment.setVehiculosParqueados(carrosParqueados);
         return carrosFragment;
     }
 
-    private void filtrarSoloCarros(List<VehiculoParqueado> carrosParqueados) {
-        Iterator<VehiculoParqueado> iter = carrosParqueados.iterator();
-        while(iter.hasNext()) {
-            if (iter.next().getVehiculo().getTipo().getNombre().equals("Moto")) iter.remove();
-        }
-    }
+
 
     private Fragment crearFragmentoMotos() {
-        List<VehiculoParqueado> motosParqueadas = new ArrayList();
-        motosParqueadas.addAll(vehiculosParqueados);
-        filtrarSoloMotos(motosParqueadas);
-
         MotosFragment motosFragment = new MotosFragment();
         motosFragment.setVehiculosParqueados(motosParqueadas);
         return motosFragment;
     }
 
-    private void filtrarSoloMotos(List<VehiculoParqueado> motosParqueadas) {
-        Iterator<VehiculoParqueado> iter = motosParqueadas.iterator();
-        while(iter.hasNext()) {
-            if (iter.next().getVehiculo().getTipo().getNombre().equals("Carro")) iter.remove();
-        }
-    }
 }

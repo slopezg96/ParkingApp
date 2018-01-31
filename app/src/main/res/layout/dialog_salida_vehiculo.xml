@@ -39,74 +39,120 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_TipoVehiculo"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:gravity="center"
+            android:gravity="start"
             android:id="@+id/textView_TipoVehiculo"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content"
-            android:text="Carro"/>
+            style="@style/EstiloTextoContenido"
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:gravity="center"
+            android:gravity="end"
             android:id="@+id/textView_PlacaVehiculo"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content"
-            android:text="KMT996"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_Cilindraje"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:gravity="center"
+            android:gravity="start"
             android:layout_width="0dp"
             android:layout_weight="0.5"
+            style="@style/EstiloTextoContenido"
             android:layout_height="wrap_content"
             android:text="@string/texto_hint_cilindraje"/>
 
         <TextView
-            android:gravity="center"
+            android:gravity="end"
             android:id="@+id/textView_Cilindraje"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content"
-            android:text="650 CC"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_FechaIngreso"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:gravity="center"
+            android:gravity="start"
             android:layout_width="0dp"
             android:layout_weight="0.5"
+            style="@style/EstiloTextoContenido"
             android:layout_height="wrap_content"
             android:text="@string/texto_fecha_ingreso"/>
 
         <TextView
-            android:gravity="center"
+            android:gravity="end"
             android:id="@+id/textView_FechaIngreso"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="wrap_content"
-            android:text="11/02/2018 8:00 a.m"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout_Total"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="start"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/texto_valor_total"/>
+
+        <TextView
+            android:gravity="end"
+            android:id="@+id/textView_ValorTotal"
+            style="@style/EstiloTextoContenido"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
     <Button
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
         android:text="@string/texto_button_cobrar"
         android:id="@+id/button_Cobrar"
         android:textColor="@color/blanco"
         android:background="@color/azul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        android:text="@string/texto_button_salir"
+        android:id="@+id/button_Salir"
+        android:textColor="@color/blanco"
+        android:background="@color/gris"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

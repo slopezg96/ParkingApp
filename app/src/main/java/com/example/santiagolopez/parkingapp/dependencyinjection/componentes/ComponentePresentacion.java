@@ -4,6 +4,7 @@ import com.example.santiagolopez.parkingapp.dependencyinjection.modulos.ModuloPr
 import com.example.santiagolopez.parkingapp.dependencyinjection.scopes.ActivityScoped;
 import com.example.santiagolopez.parkingapp.view.activities.HomeActivity;
 import com.example.santiagolopez.parkingapp.view.popup.NuevoVehiculoPopUp;
+import com.example.santiagolopez.parkingapp.view.popup.SalidaVehiculoPopup;
 
 import dagger.Component;
 
@@ -18,4 +19,6 @@ public interface ComponentePresentacion {
     void inject(HomeActivity homeActivity);
 
     void inject(NuevoVehiculoPopUp nuevoVehiculoPopUp);
+
+    void inject(SalidaVehiculoPopup salidaVehiculoPopup);
 }

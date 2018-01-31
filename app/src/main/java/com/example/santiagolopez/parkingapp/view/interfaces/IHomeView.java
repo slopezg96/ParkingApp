@@ -12,5 +12,8 @@ public interface IHomeView extends BaseView {
 
     void mostrarVehiculosParqueados(List<VehiculoParqueado> vehiculosParqueados);
 
-    void refrescarDisponibilidadParqueadero(VehiculoParqueado vehiculoParqueado);
+    void adicionarVehiculo(VehiculoParqueado vehiculoParqueado);
+
+    void eliminarVehiculo(VehiculoParqueado vehiculoParqueado);
+
 }

@@ -1,8 +1,12 @@
 package com.example.santiagolopez.parkingapp.repositories;
 
+import com.example.santiagolopez.parkingapp.model.Vehiculo;
+import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
+import com.example.santiagolopez.parkingapp.services.dto.VehiculoDTO;
 import com.example.santiagolopez.parkingapp.services.dto.VehiculoParqueadoDTO;
 import com.example.santiagolopez.parkingapp.services.IServices;
 import com.example.santiagolopez.parkingapp.services.ServicesFactory;
+import com.example.santiagolopez.parkingapp.util.RepositoryError;
 
 import java.util.List;
 
@@ -31,6 +35,21 @@ public class ParkingRepository implements IParkingRepository {
     @Override
     public void ingresarVehiculoParqueado(Callback<VehiculoParqueadoDTO> callback,
                                           VehiculoParqueadoDTO vehiculoParqueadoDTO) {
-        iServices.ingresarVehiculoParqueado(vehiculoParqueadoDTO).enqueue(callback);
+        try {
+            iServices.ingresarVehiculoParqueado(vehiculoParqueadoDTO).enqueue(callback);
+        } catch (RepositoryError repositoryError) {
+            repositoryError.printStackTrace();
+        }
     }
+
+    @Override
+    public void buscarVehiculoParqueadoXPlaca(Callback<List<VehiculoParqueadoDTO>> callback, String placa) {
+        iServices.getVehiculoParqueadoXPlaca(placa).enqueue(callback);
+    }
+
+    @Override
+    public void cobrar(Callback<VehiculoParqueadoDTO> callback, VehiculoParqueadoDTO vehiculoParqueadoDTO) {
+        iServices.cobrar(vehiculoParqueadoDTO).enqueue(callback);
+    }
+
 }

@@ -6,6 +6,7 @@ package com.example.santiagolopez.parkingapp.services.dto;
 
 public class TipoVehiculoDTO {
 
+    public Long id;
     public String nombre;
     public double valorDia;
     public double valorHora;

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class TipoVehiculo implements Serializable {
 
-    private String id;
+    private Long id;
     private String nombre;
     private double valorDia;
     private double valorHora;
@@ -17,11 +17,11 @@ public class TipoVehiculo implements Serializable {
         nombre = "";
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

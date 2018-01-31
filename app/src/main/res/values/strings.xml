@@ -9,4 +9,11 @@
     <string name="texto_salida_vehiculo">Sálida vehículo</string>
     <string name="texto_fecha_ingreso">Fecha ingreso</string>
     <string name="texto_button_cobrar">COBRAR</string>
+    <string name="texto_no_se_encuentra_parqueado">El vehículo no se encuentra en el parqueadero.</string>
+    <string name="texto_debe_ingresar_placa">Debe ingresar una placa.</string>
+    <string name="texto_valor_total">Valor Total:</string>
+    <string name="texto_button_salir">Salir</string>
+    <string name="texto_no_hay_parqueadero_disponible">No hay parqueadero disponibles en el momento.</string>
+    <string name="texto_placa_no_habilitada">La placa de su vehículo no está habilitada para ingresar el día de hoy</string>
+    <string name="texto_no_internet">Verifica que tu dispositivo se encuentra conectado a internet</string>
 </resources>

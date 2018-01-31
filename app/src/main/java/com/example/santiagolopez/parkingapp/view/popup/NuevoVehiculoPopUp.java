@@ -1,6 +1,7 @@
 package com.example.santiagolopez.parkingapp.view.popup;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Window;
@@ -8,9 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.santiagolopez.parkingapp.R;
-import com.example.santiagolopez.parkingapp.businesslogic.ParqueaderoBusinessLogic;
 import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
 import com.example.santiagolopez.parkingapp.model.Vehiculo;
 import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
@@ -22,16 +23,11 @@ import com.example.santiagolopez.parkingapp.view.interfaces.INuevoVehiculoView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 /**
  * Created by santiago.lopez on 1/23/18.
  */
 
 public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implements INuevoVehiculoView {
-
-    @Inject
-    ParqueaderoBusinessLogic parqueaderoBusinessLogic;
 
     private IHomeView iHomeView;
     private Spinner spinnerTiposVehiculos;
@@ -39,6 +35,8 @@ public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implem
     private EditText editTextCilindraje;
     private ImageView imageViewBuscarVehiculo;
     private Button buttonIngresarNuevoVehiculo;
+    private List<VehiculoParqueado> motosParqueadas;
+    private List<VehiculoParqueado> carrosParqueados;
 
 
     @Override
@@ -54,8 +52,20 @@ public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implem
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_nuevo_vehiculo);
         obtenerControles(dialog);
-        asignarEventos();presentador.iniciar();
+        asignarEventos();
+        presentador.setCarrosParqueados(carrosParqueados);
+        presentador.setMotosParqueadas(motosParqueadas);
+        presentador.setValidateInternet(getValidateInternet());
+        presentador.iniciar();
         return dialog;
+    }
+
+    public void setMotosParqueadas(List<VehiculoParqueado> motosParqueadas) {
+        this.motosParqueadas = motosParqueadas;
+    }
+
+    public void setCarrosParqueados(List<VehiculoParqueado> carrosParqueados) {
+        this.carrosParqueados = carrosParqueados;
     }
 
     public void setiHomeView(IHomeView iHomeView) {
@@ -73,7 +83,8 @@ public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implem
             vehiculo.setTipo((TipoVehiculo) spinnerTiposVehiculos.getSelectedItem());
             vehiculo.setPlaca(editTextPlaca.getText().toString());
             vehiculo.setCilindraje(Integer.parseInt(editTextCilindraje.getText().toString()));
-            presentador.ingresoVehiculo(vehiculo);
+            presentador.setVehiculo(vehiculo);
+            presentador.ingresoVehiculo();
             dismiss();
         });
     }
@@ -98,6 +109,21 @@ public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implem
 
     @Override
     public void refrescarDisponibilidadParqueadero(VehiculoParqueado vehiculoParqueado) {
-        iHomeView.refrescarDisponibilidadParqueadero(vehiculoParqueado);
+        iHomeView.adicionarVehiculo(vehiculoParqueado);
+    }
+
+    @Override
+    public void mostrarMensajeError(int resourceMensaje) {
+        Toast.makeText(getContext(), getString(resourceMensaje), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void mostrarMensajeError(String mensaje) {
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return getActivity();
     }
 }
