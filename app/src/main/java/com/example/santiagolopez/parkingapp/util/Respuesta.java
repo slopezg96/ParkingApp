@@ -6,5 +6,5 @@ package com.example.santiagolopez.parkingapp.util;
 
 public class Respuesta {
     public boolean respuesta;
-    public String mensaje;
+    public int mensaje;
 }

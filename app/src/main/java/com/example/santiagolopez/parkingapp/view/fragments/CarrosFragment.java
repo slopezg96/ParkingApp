@@ -14,7 +14,6 @@ import com.example.santiagolopez.parkingapp.model.VehiculoParqueado;
 import com.example.santiagolopez.parkingapp.view.adapters.VehiculosParqueadosAdapter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

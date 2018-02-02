@@ -94,18 +94,18 @@ public class SalidaVehiculoPopup extends BasePopup<SalidaVehiculoPresenter> impl
     private void asignarEventos() {
         imageViewSearch.setOnClickListener(view -> {
             if (!editTextPlaca.getText().toString().isEmpty()) {
-                presentador.buscarVehiculoParqueadoXPlaca(editTextPlaca.getText().toString());
+                presentador.validarInternetBuscarVehiculoParqueadoXPlaca(editTextPlaca.getText().toString());
             } else {
                 mostrarMensaje(getString(R.string.texto_debe_ingresar_placa));
             }
         });
 
         buttonCobrar.setOnClickListener(view -> {
-            presentador.cobrar();
+            presentador.validarInternetCobrar();
         });
 
         buttonSalir.setOnClickListener(view -> {
-            eliminarVehiculoParqueado(presentador.getVehiculoParqueado());
+            refrescarLista();
             dismiss();
         });
     }
@@ -133,8 +133,8 @@ public class SalidaVehiculoPopup extends BasePopup<SalidaVehiculoPresenter> impl
         textViewValorTotal.setText(StringHelper.getFormatoPesos(vehiculoParqueado.getValor()));
     }
 
-    public void eliminarVehiculoParqueado(VehiculoParqueado vehiculoParqueado) {
-        iHomeView.eliminarVehiculo(vehiculoParqueado);
+    public void refrescarLista() {
+        iHomeView.refrescarLista();
     }
 
     private void mostrarControlesInformacion() {

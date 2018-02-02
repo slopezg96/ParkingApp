@@ -73,9 +73,8 @@ public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements 
     }
 
     @Override
-    public void eliminarVehiculo(VehiculoParqueado vehiculoParqueado) {
-        vehiculoParqueados.remove(vehiculoParqueado);
-        reconstruirTabs(vehiculoParqueado);
+    public void refrescarLista() {
+        presentador.iniciar();
     }
 
     private void reconstruirTabs(VehiculoParqueado vehiculoParqueado) {

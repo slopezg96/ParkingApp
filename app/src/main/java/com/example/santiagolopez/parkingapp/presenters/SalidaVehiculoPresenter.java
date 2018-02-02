@@ -41,21 +41,34 @@ public class SalidaVehiculoPresenter extends BasePresenter<ISalidaVehiculo> {
     }
 
     public void buscarVehiculoParqueadoXPlaca(String placa) {
-        if (getValidateInternet().isConnected()) {
-            parqueaderoBusinessLogic.buscarVehiculoParqueadoXPlaca(new Callback<List<VehiculoParqueadoDTO>>() {
-                @Override
-                public void onResponse(Call<List<VehiculoParqueadoDTO>> call, Response<List<VehiculoParqueadoDTO>> response) {
-                    if (response.isSuccessful()) {
-                        vista.mostrarInformacionVehiculoParqueado(
-                                Mapper.convertirDTOVehiculoParqueadoAModelo(response.body().get(0)));
-                    }
+        parqueaderoBusinessLogic.buscarVehiculoParqueadoXPlaca(new Callback<List<VehiculoParqueadoDTO>>() {
+            @Override
+            public void onResponse(Call<List<VehiculoParqueadoDTO>> call, Response<List<VehiculoParqueadoDTO>> response) {
+                if (response.isSuccessful()) {
+                    vista.mostrarInformacionVehiculoParqueado(
+                            Mapper.convertirDTOVehiculoParqueadoAModelo(response.body().get(0)));
                 }
+            }
 
-                @Override
-                public void onFailure(Call<List<VehiculoParqueadoDTO>> call, Throwable t) {
-                    t.getMessage();
-                }
-            }, placa);
+            @Override
+            public void onFailure(Call<List<VehiculoParqueadoDTO>> call, Throwable t) {
+                t.getMessage();
+            }
+        }, placa);
+
+    }
+
+    public void validarInternetBuscarVehiculoParqueadoXPlaca(String placa) {
+        if (getValidateInternet().isConnected()) {
+            buscarVehiculoParqueadoXPlaca(placa);
+        } else {
+            vista.mostrarMensajeError(R.string.texto_no_internet);
+        }
+    }
+
+    public void validarInternetCobrar() {
+        if (getValidateInternet().isConnected()) {
+            cobrar();
         } else {
             vista.mostrarMensajeError(R.string.texto_no_internet);
         }
@@ -66,25 +79,21 @@ public class SalidaVehiculoPresenter extends BasePresenter<ISalidaVehiculo> {
     }
 
     public void cobrar() {
-        if (getValidateInternet().isConnected()) {
-            vehiculoParqueado.setFechaSalida(new Date());
-            parqueaderoBusinessLogic.cobrar(new Callback<VehiculoParqueadoDTO>() {
-                @Override
-                public void onResponse(Call<VehiculoParqueadoDTO> call, Response<VehiculoParqueadoDTO> response) {
-                    if (response.isSuccessful()) {
-                        vehiculoParqueado = Mapper.convertirDTOVehiculoParqueadoAModelo(response.body());
-                        vista.mostrarValortotal(vehiculoParqueado);
-                    }
+        vehiculoParqueado.setFechaSalida(new Date());
+        parqueaderoBusinessLogic.cobrar(new Callback<VehiculoParqueadoDTO>() {
+            @Override
+            public void onResponse(Call<VehiculoParqueadoDTO> call, Response<VehiculoParqueadoDTO> response) {
+                if (response.isSuccessful()) {
+                    vehiculoParqueado = Mapper.convertirDTOVehiculoParqueadoAModelo(response.body());
+                    vista.mostrarValortotal(vehiculoParqueado);
                 }
+            }
 
-                @Override
-                public void onFailure(Call<VehiculoParqueadoDTO> call, Throwable t) {
-                    vista.mostrarMensajeError(t.getMessage());
-                }
-            }, Mapper.convertirModeloVehiculoParqueadoADTO(vehiculoParqueado));
-        } else {
-            vista.mostrarMensajeError(vista.getContext().getString(R.string.texto_no_internet));
-        }
+            @Override
+            public void onFailure(Call<VehiculoParqueadoDTO> call, Throwable t) {
+                vista.mostrarMensajeError(t.getMessage());
+            }
+        }, Mapper.convertirModeloVehiculoParqueadoADTO(vehiculoParqueado));
     }
 
     public VehiculoParqueado getVehiculoParqueado() {

@@ -52,7 +52,7 @@ public class NuevoVehiculoPresenter extends BasePresenter<INuevoVehiculoView> {
 
     @Override
     public void iniciar() {
-        if(getValidateInternet().isConnected()) {
+        if (getValidateInternet().isConnected()) {
             tipoVehiculoBusinessLogic.getTiposVehiculos(new Callback<List<TipoVehiculoDTO>>() {
                 @Override
                 public void onResponse(Call<List<TipoVehiculoDTO>> call, Response<List<TipoVehiculoDTO>> response) {
@@ -72,7 +72,7 @@ public class NuevoVehiculoPresenter extends BasePresenter<INuevoVehiculoView> {
                     vista.mostrarMensajeError(t.getMessage());
                 }
             });
-        }else {
+        } else {
             vista.mostrarMensajeError(R.string.texto_no_internet);
         }
     }
@@ -82,12 +82,12 @@ public class NuevoVehiculoPresenter extends BasePresenter<INuevoVehiculoView> {
 
     }
 
-    private Respuesta validarDisponibilidadXFechaYPlaca() {
+    public Respuesta validarDisponibilidadXFechaYPlaca() {
         Respuesta respuesta = new Respuesta();
         if (estaDisponibleXPlacaYFecha(vehiculo.getPlaca(), new Date())) {
             respuesta.respuesta = true;
         } else {
-            respuesta.mensaje = vista.getContext().getString(R.string.texto_placa_no_habilitada);
+            respuesta.mensaje = R.string.texto_placa_no_habilitada;
         }
         return respuesta;
     }
@@ -102,34 +102,30 @@ public class NuevoVehiculoPresenter extends BasePresenter<INuevoVehiculoView> {
     }
 
     public void ingresoVehiculo() {
-        if(getValidateInternet().isConnected()) {
-            if (validarDisponibilidad().respuesta) {
-                Respuesta respuesta = validarDisponibilidadXFechaYPlaca();
-                if (respuesta.respuesta) {
-                    try {
-                        parqueaderoBusinessLogic.ingresarVehiculo(new Callback<VehiculoParqueadoDTO>() {
-                            @Override
-                            public void onResponse(Call<VehiculoParqueadoDTO> call, Response<VehiculoParqueadoDTO> response) {
-                                vista.refrescarDisponibilidadParqueadero(Mapper.convertirDTOVehiculoParqueadoAModelo(response.body()));
-                                vista.cerrarDialog();
-                            }
+        if (validarDisponibilidad().respuesta) {
+            Respuesta respuesta = validarDisponibilidadXFechaYPlaca();
+            if (respuesta.respuesta) {
+                try {
+                    parqueaderoBusinessLogic.ingresarVehiculo(new Callback<VehiculoParqueadoDTO>() {
+                        @Override
+                        public void onResponse(Call<VehiculoParqueadoDTO> call, Response<VehiculoParqueadoDTO> response) {
+                            vista.refrescarDisponibilidadParqueadero(Mapper.convertirDTOVehiculoParqueadoAModelo(response.body()));
+                            vista.cerrarDialog();
+                        }
 
-                            @Override
-                            public void onFailure(Call<VehiculoParqueadoDTO> call, Throwable t) {
-                                vista.mostrarMensajeError(t.getMessage());
-                            }
-                        }, vehiculo);
-                    } catch (RepositoryError repositoryError) {
-                        repositoryError.printStackTrace();
-                    }
-                } else {
-                    vista.mostrarMensajeError(respuesta.mensaje);
+                        @Override
+                        public void onFailure(Call<VehiculoParqueadoDTO> call, Throwable t) {
+                            vista.mostrarMensajeError(t.getMessage());
+                        }
+                    }, vehiculo);
+                } catch (RepositoryError repositoryError) {
+                    repositoryError.printStackTrace();
                 }
             } else {
-                vista.mostrarMensajeError(R.string.texto_no_hay_parqueadero_disponible);
+                vista.mostrarMensajeError(respuesta.mensaje);
             }
-        }else {
-            vista.mostrarMensajeError(R.string.texto_no_internet);
+        } else {
+            vista.mostrarMensajeError(R.string.texto_no_hay_parqueadero_disponible);
         }
 
     }
@@ -153,5 +149,14 @@ public class NuevoVehiculoPresenter extends BasePresenter<INuevoVehiculoView> {
 
     public void setCarrosParqueados(List<VehiculoParqueado> carrosParqueados) {
         this.carrosParqueados = carrosParqueados;
+    }
+
+    public void validarInternetGetTiposVehiculos() {
+        if (getValidateInternet().isConnected()) {
+            ingresoVehiculo();
+        } else {
+            vista.mostrarMensajeError(R.string.texto_no_internet);
+
+        }
     }
 }

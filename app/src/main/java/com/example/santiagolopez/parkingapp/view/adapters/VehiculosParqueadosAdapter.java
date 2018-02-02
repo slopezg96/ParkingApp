@@ -1,7 +1,6 @@
 package com.example.santiagolopez.parkingapp.view.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

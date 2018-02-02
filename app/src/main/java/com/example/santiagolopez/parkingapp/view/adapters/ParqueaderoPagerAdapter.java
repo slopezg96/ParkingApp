@@ -9,7 +9,6 @@ import com.example.santiagolopez.parkingapp.view.fragments.CarrosFragment;
 import com.example.santiagolopez.parkingapp.view.fragments.MotosFragment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

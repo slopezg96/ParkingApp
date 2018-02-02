@@ -1,6 +1,5 @@
 package com.example.santiagolopez.parkingapp;
 
-import com.example.santiagolopez.parkingapp.businesslogic.ParqueaderoBusinessLogic;
 import com.example.santiagolopez.parkingapp.model.TipoVehiculo;
 import com.example.santiagolopez.parkingapp.model.Vehiculo;
 import com.example.santiagolopez.parkingapp.repositories.IParkingRepository;
@@ -13,19 +12,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static org.mockito.Mockito.verify;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
