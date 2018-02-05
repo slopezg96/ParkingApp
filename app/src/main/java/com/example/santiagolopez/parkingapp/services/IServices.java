@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 /**
  * Created by santiago.lopez on 1/22/18.
@@ -25,8 +25,8 @@ public interface IServices {
     @GET("vehiculosParqueados/")
     Call<List<VehiculoParqueadoDTO>> getVehiculosParqueados();
 
-    @GET("vehiculosParqueados")
-    Call<List<VehiculoParqueadoDTO>> getVehiculoParqueadoXPlaca(@Query("placa") String placa);
+    @GET("vehiculosParqueados/{placa}")
+    Call<VehiculoParqueadoDTO> getVehiculoParqueadoXPlaca(@Path("placa") String placa);
 
     @POST("vehiculosParqueados/")
     Call<VehiculoParqueadoDTO> ingresarVehiculoParqueado(@Body VehiculoParqueadoDTO vehiculoParqueadoDTO) throws RepositoryError;

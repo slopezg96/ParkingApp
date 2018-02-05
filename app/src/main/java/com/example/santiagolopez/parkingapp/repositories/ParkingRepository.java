@@ -43,7 +43,7 @@ public class ParkingRepository implements IParkingRepository {
     }
 
     @Override
-    public void buscarVehiculoParqueadoXPlaca(Callback<List<VehiculoParqueadoDTO>> callback, String placa) {
+    public void buscarVehiculoParqueadoXPlaca(Callback<VehiculoParqueadoDTO> callback, String placa) {
         iServices.getVehiculoParqueadoXPlaca(placa).enqueue(callback);
     }
 

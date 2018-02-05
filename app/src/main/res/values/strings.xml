@@ -16,4 +16,6 @@
     <string name="texto_no_hay_parqueadero_disponible">No hay parqueadero disponibles en el momento.</string>
     <string name="texto_placa_no_habilitada">La placa de su vehículo no está habilitada para ingresar el día de hoy</string>
     <string name="texto_no_internet">Verifica que tu dispositivo se encuentra conectado a internet</string>
+    <string name="texto_vehiculo_con_la_placa">El vehículo con placa: </string>
+    <string name="texto_no_se_encentra_parqueado">no se encuentra parqueado.</string>
 </resources>

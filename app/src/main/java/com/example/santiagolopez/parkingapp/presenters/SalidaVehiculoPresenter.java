@@ -41,18 +41,21 @@ public class SalidaVehiculoPresenter extends BasePresenter<ISalidaVehiculo> {
     }
 
     public void buscarVehiculoParqueadoXPlaca(String placa) {
-        parqueaderoBusinessLogic.buscarVehiculoParqueadoXPlaca(new Callback<List<VehiculoParqueadoDTO>>() {
+        parqueaderoBusinessLogic.buscarVehiculoParqueadoXPlaca(new Callback<VehiculoParqueadoDTO>() {
             @Override
-            public void onResponse(Call<List<VehiculoParqueadoDTO>> call, Response<List<VehiculoParqueadoDTO>> response) {
+            public void onResponse(Call<VehiculoParqueadoDTO> call, Response<VehiculoParqueadoDTO> response) {
                 if (response.isSuccessful()) {
                     vista.mostrarInformacionVehiculoParqueado(
-                            Mapper.convertirDTOVehiculoParqueadoAModelo(response.body().get(0)));
+                            Mapper.convertirDTOVehiculoParqueadoAModelo(response.body()));
+                }else {
+                    vista.mostrarMensajeError(vista.getContext().getString(R.string.texto_vehiculo_con_la_placa)
+                            + placa + vista.getContext().getString(R.string.texto_no_se_encentra_parqueado));
                 }
             }
 
             @Override
-            public void onFailure(Call<List<VehiculoParqueadoDTO>> call, Throwable t) {
-                t.getMessage();
+            public void onFailure(Call<VehiculoParqueadoDTO> call, Throwable t) {
+                vista.mostrarMensajeError(t.getMessage());
             }
         }, placa);
 
@@ -96,7 +99,4 @@ public class SalidaVehiculoPresenter extends BasePresenter<ISalidaVehiculo> {
         }, Mapper.convertirModeloVehiculoParqueadoADTO(vehiculoParqueado));
     }
 
-    public VehiculoParqueado getVehiculoParqueado() {
-        return vehiculoParqueado;
-    }
 }

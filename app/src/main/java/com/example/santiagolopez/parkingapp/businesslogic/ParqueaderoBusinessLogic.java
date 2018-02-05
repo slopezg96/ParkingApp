@@ -48,7 +48,7 @@ public class ParqueaderoBusinessLogic {
         iParkingRepository.getVehiculosParqueados(callback);
     }
 
-    public void buscarVehiculoParqueadoXPlaca(Callback<List<VehiculoParqueadoDTO>> callback, String placa) {
+    public void buscarVehiculoParqueadoXPlaca(Callback<VehiculoParqueadoDTO> callback, String placa) {
         iParkingRepository.buscarVehiculoParqueadoXPlaca(callback, placa);
     }
 

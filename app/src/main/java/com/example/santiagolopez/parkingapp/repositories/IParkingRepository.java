@@ -17,7 +17,7 @@ public interface IParkingRepository {
     void ingresarVehiculoParqueado(Callback<VehiculoParqueadoDTO> callback,
                                    VehiculoParqueadoDTO vehiculoParqueadoDTO);
 
-    void buscarVehiculoParqueadoXPlaca(Callback<List<VehiculoParqueadoDTO>> callback, String placa);
+    void buscarVehiculoParqueadoXPlaca(Callback<VehiculoParqueadoDTO> callback, String placa);
 
     void cobrar(Callback<VehiculoParqueadoDTO> callback, VehiculoParqueadoDTO vehiculoParqueadoDTO);
 }
