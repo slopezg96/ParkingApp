@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,14 +82,29 @@ public class NuevoVehiculoPopUp extends BasePopup<NuevoVehiculoPresenter> implem
 
     private void asignarEventos() {
         buttonIngresarNuevoVehiculo.setOnClickListener(view -> {
-            Vehiculo vehiculo = new Vehiculo();
-            vehiculo.setTipo((TipoVehiculo) spinnerTiposVehiculos.getSelectedItem());
-            vehiculo.setPlaca(editTextPlaca.getText().toString());
-            vehiculo.setCilindraje(Integer.parseInt(editTextCilindraje.getText().toString()));
-            presentador.setVehiculo(vehiculo);
-            presentador.ingresoVehiculo();
-            dismiss();
+            if (spinnerTiposVehiculos.getSelectedItemPosition() > 0 && !editTextPlaca.getText().toString().isEmpty()
+                    && !editTextCilindraje.getText().toString().isEmpty()) {
+                Vehiculo vehiculo = new Vehiculo();
+                vehiculo.setTipo((TipoVehiculo) spinnerTiposVehiculos.getSelectedItem());
+                vehiculo.setPlaca(editTextPlaca.getText().toString());
+                vehiculo.setCilindraje(Integer.parseInt(editTextCilindraje.getText().toString()));
+                presentador.setVehiculo(vehiculo);
+                presentador.ingresoVehiculo();
+                dismiss();
+            } else {
+                mostrarMensaje("Debe ingresar todos los campos para registrar el parqueo.");
+            }
         });
+
+        configurarSoloMayusculasEditText();
+    }
+
+    private void configurarSoloMayusculasEditText() {
+        InputFilter[] editFilters = editTextPlaca.getFilters();
+        InputFilter[] newFilters = new InputFilter[editFilters.length + 1];
+        System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
+        newFilters[editFilters.length] = new InputFilter.AllCaps();
+        editTextPlaca.setFilters(newFilters);
     }
 
     private void obtenerControles(Dialog dialog) {

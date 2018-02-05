@@ -42,7 +42,6 @@ public class HomeActivity extends BaseActivity<ParqueaderoPresenter> implements 
     }
 
     private void configurarActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
     }
 
